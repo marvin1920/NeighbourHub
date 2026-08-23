@@ -1,0 +1,66 @@
+/* =========================
+   Sidebar
+========================= */
+
+.sidebar {
+  width: 220px;
+  min-height: 100vh;
+  background: lightblue;
+  padding: 25px 15px;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-right: 1px solid #ddd6fe;
+}
+
+/* Logo */
+
+.sidebar h2 {
+  color: #4338ca;
+  font-size: 22px;
+  margin: 10px 15px 35px;
+  font-weight: 700;
+}
+
+/* Navigation */
+
+.sidebar a {
+  display: block;
+  text-decoration: none;
+  color: #374151;
+  padding: 13px 15px;
+  margin: 6px 0;
+  border-radius: 9px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+/* Hover */
+
+.sidebar a:hover {
+  background: #ddd6fe;
+  color: #4f46e5;
+  transform: translateX(3px);
+}
+
+/* Active link */
+
+.sidebar a.active {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+/* Logout */
+
+.sidebar .logout {
+  margin-top: 25px;
+  color: #dc2626;
+}
+
+.sidebar .logout:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}

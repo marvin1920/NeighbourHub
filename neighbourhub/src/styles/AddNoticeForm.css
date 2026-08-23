@@ -1,0 +1,62 @@
+/* =========================
+   Add Notice Form
+========================= */
+
+.add-notice-form {
+  width: 440px;
+  max-width: 100%;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #e0e7ff;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.08);
+  box-sizing: border-box;
+}
+
+.add-notice-form h2 {
+  color: #3730a3;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.add-notice-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-notice-form input,
+.add-notice-form textarea {
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #c7d2fe;
+  border-radius: 7px;
+  font-size: 14px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.add-notice-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.add-notice-form input:focus,
+.add-notice-form textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.add-notice-form button {
+  padding: 12px;
+  border: none;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-notice-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(79, 70, 229, 0.2);
+}

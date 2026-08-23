@@ -1,0 +1,7 @@
+.main-content {
+  margin-left: 220px;
+  min-height: 100vh;
+  padding: 30px;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #f5f7ff, #f8f4ff);
+}

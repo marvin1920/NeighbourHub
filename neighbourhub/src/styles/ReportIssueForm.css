@@ -1,0 +1,62 @@
+/* =========================
+   Report Issue Form
+========================= */
+
+.report-issue-form {
+  width: 440px;
+  max-width: 100%;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #e0e7ff;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.08);
+  box-sizing: border-box;
+}
+
+.report-issue-form h2 {
+  color: #3730a3;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.report-issue-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.report-issue-form input,
+.report-issue-form textarea {
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #c7d2fe;
+  border-radius: 7px;
+  font-size: 14px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.report-issue-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.report-issue-form input:focus,
+.report-issue-form textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.report-issue-form button {
+  padding: 12px;
+  border: none;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.report-issue-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(79, 70, 229, 0.2);
+}

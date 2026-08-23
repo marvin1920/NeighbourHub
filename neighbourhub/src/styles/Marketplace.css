@@ -1,0 +1,130 @@
+.marketplace-page {
+  min-height: 100vh;
+  padding: 45px 60px;
+  box-sizing: border-box;
+}
+
+.marketplace-page h1 {
+  color: #312e81;
+  margin-bottom: 30px;
+}
+
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.product-card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  border: 1px solid #e0e7ff;
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.08);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.15);
+}
+
+.product-card h2 {
+  color: #3730a3;
+  margin-bottom: 15px;
+}
+.product-card p {
+  color: #64748b;
+}
+
+.product-price {
+  color: #4f46e5;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.product-card button {
+  margin-top: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+  cursor: pointer;
+}
+
+.product-card button:hover {
+  transform: translateY(-2px);
+}
+
+.search-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 15px;
+  margin-bottom: 25px;
+  border: 1px solid #c7d2fe;
+  border-radius: 8px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+/* Edit Product Form */
+
+.edit-product-form {
+  max-width: 500px;
+  background: white;
+  padding: 25px;
+  margin-bottom: 30px;
+  border-radius: 14px;
+  border: 1px solid #e0e7ff;
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-product-form h2 {
+  color: #3730a3;
+  margin-bottom: 5px;
+}
+
+.edit-product-form input {
+  padding: 12px 14px;
+  border: 1px solid #c7d2fe;
+  border-radius: 8px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.edit-product-form input:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.edit-product-form button {
+  padding: 11px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.edit-product-form button:hover {
+  transform: translateY(-2px);
+}
+.delete-button {
+  margin-left: 8px;
+  background: #ef4444 !important;
+}
+
+.delete-button:hover {
+  background: #dc2626 !important;
+}
