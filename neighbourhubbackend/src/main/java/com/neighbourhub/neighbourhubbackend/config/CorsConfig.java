@@ -13,7 +13,8 @@ public class CorsConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins(
                         "http://localhost:3000",
-                        "https://neighbourhub-frontend.onrender.com"
+                        "http://localhost:3001",
+                        "https://neighbourhub-frontend-3.onrender.com"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
