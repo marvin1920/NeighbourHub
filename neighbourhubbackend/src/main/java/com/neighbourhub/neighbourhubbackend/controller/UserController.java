@@ -42,6 +42,19 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User newUser) {
+
+        if (userRepository.findByEmail(newUser.getEmail()).isPresent()) {
+            return ResponseEntity.status(409).body("Email already registered");
+        }
+
+        newUser.setRole("USER");
+        User savedUser = userRepository.save(newUser);
+
+        return ResponseEntity.ok(savedUser);
+    }
+
     public static class LoginRequest {
         private String email;
         private String password;
