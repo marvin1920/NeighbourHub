@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import API from "../api/api"; // adjust this path if your api.js file lives somewhere else
 import "../styles/Login.css";
 
 function Login() {
@@ -10,7 +11,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
 
     if (email === "" || password === "") {
@@ -18,9 +19,17 @@ function Login() {
       return;
     }
 
-    alert("Login successful!");
+    try {
+      const response = await API.post("/login", { email, password });
+      // adjust "/login" to match your actual Spring Boot endpoint if it's different
 
-    navigate("/dashboard");
+      console.log("Login response:", response.data);
+      navigate("/dashboard");
+
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("Login failed. Check your email and password.");
+    }
   }
 
   return (

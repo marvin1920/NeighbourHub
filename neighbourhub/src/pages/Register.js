@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import API from "../api/api";
 import "../styles/Register.css";
 
 function Register() {
@@ -12,7 +13,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  function handleRegister(e) {
+  async function handleRegister(e) {
     e.preventDefault();
 
     if (!name || !email || !password || !confirmPassword) {
@@ -25,9 +26,16 @@ function Register() {
       return;
     }
 
-    alert("Registration successful!");
+    try {
+      await API.post("/register", { name, email, password });
 
-    navigate("/login");
+      alert("Registration successful!");
+      navigate("/login");
+
+    } catch (error) {
+      console.error("Registration failed:", error);
+      alert("Registration failed. Try a different email.");
+    }
   }
 
   return (
