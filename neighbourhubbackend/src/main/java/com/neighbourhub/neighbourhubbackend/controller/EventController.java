@@ -20,7 +20,10 @@ public class EventController {
     }
 
     @GetMapping
-    public List<Event> getAllEvents() {
+    public List<Event> getAllEvents(@RequestParam(required = false) String society) {
+        if (society != null) {
+            return eventRepository.findBySociety(society);
+        }
         return eventRepository.findAll();
     }
 
@@ -44,6 +47,7 @@ public class EventController {
         event.setTime(updatedEvent.getTime());
         event.setLocation(updatedEvent.getLocation());
         event.setOrganizer(updatedEvent.getOrganizer());
+        event.setSociety(updatedEvent.getSociety());
 
         eventRepository.save(event);
 

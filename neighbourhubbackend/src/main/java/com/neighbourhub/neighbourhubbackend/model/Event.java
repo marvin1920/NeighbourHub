@@ -19,6 +19,7 @@ public class Event {
     private String time;
     private String location;
     private String organizer;
+    private String society;
 
     public Event() {
     }
@@ -40,4 +41,7 @@ public class Event {
 
     public String getOrganizer() { return organizer; }
     public void setOrganizer(String organizer) { this.organizer = organizer; }
+
+    public String getSociety() { return society; }
+    public void setSociety(String society) { this.society = society; }
 }

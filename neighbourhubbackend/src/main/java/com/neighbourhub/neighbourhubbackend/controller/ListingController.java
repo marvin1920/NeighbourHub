@@ -20,7 +20,10 @@ public class ListingController {
     }
 
     @GetMapping
-    public List<Listing> getAllListings() {
+    public List<Listing> getAllListings(@RequestParam(required = false) String society) {
+        if (society != null) {
+            return listingRepository.findBySociety(society);
+        }
         return listingRepository.findAll();
     }
 
@@ -42,6 +45,7 @@ public class ListingController {
         listing.setName(updatedListing.getName());
         listing.setPrice(updatedListing.getPrice());
         listing.setSeller(updatedListing.getSeller());
+        listing.setSociety(updatedListing.getSociety());
 
         listingRepository.save(listing);
 

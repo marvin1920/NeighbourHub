@@ -19,7 +19,10 @@ public class IssueController {
     }
 
     @GetMapping
-    public List<Issue> getAllIssues() {
+    public List<Issue> getAllIssues(@RequestParam(required = false) String society) {
+        if (society != null) {
+            return issueRepository.findBySociety(society);
+        }
         return issueRepository.findAll();
     }
 

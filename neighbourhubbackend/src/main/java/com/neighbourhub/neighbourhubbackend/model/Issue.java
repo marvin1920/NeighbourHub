@@ -19,6 +19,7 @@ public class Issue {
     private String location;
     private String description;
     private String reportedBy;
+    private String society;
 
     public Issue() {
     }
@@ -40,4 +41,7 @@ public class Issue {
 
     public String getReportedBy() { return reportedBy; }
     public void setReportedBy(String reportedBy) { this.reportedBy = reportedBy; }
+
+    public String getSociety() { return society; }
+    public void setSociety(String society) { this.society = society; }
 }

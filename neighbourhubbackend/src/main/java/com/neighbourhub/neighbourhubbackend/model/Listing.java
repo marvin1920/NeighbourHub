@@ -17,6 +17,7 @@ public class Listing {
     private String name;
     private Double price;
     private String seller;
+    private String society;
 
     public Listing() {
     }
@@ -32,4 +33,7 @@ public class Listing {
 
     public String getSeller() { return seller; }
     public void setSeller(String seller) { this.seller = seller; }
+
+    public String getSociety() { return society; }
+    public void setSociety(String society) { this.society = society; }
 }
