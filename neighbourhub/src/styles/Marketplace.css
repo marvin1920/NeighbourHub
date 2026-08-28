@@ -11,7 +11,7 @@
 
 .products-container {
   display: grid;
-  grid-template-columns: repeat(3, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   width: 100%;
   max-width: 1000px;
@@ -23,6 +23,7 @@
   border-radius: 14px;
   border: 1px solid #e0e7ff;
   box-shadow: 0 6px 20px rgba(79, 70, 229, 0.08);
+  box-sizing: border-box;
 }
 
 .product-card:hover {
@@ -73,6 +74,7 @@
   outline: none;
   border-color: #6366f1;
 }
+
 /* Edit Product Form */
 
 .edit-product-form {
@@ -100,6 +102,7 @@
   border-radius: 8px;
   font-size: 15px;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .edit-product-form input:focus {
@@ -127,4 +130,12 @@
 
 .delete-button:hover {
   background: #dc2626 !important;
+}
+
+@media (max-width: 768px) {
+
+  .marketplace-page {
+    padding: 25px 15px;
+  }
+
 }

@@ -43,6 +43,7 @@
 
 .issue-card {
   width: 300px;
+  max-width: 100%;
   background: white;
   padding: 25px;
   border-radius: 12px;
@@ -83,4 +84,12 @@
 
 .issue-card .delete-button:hover {
   background: #dc2626;
+}
+
+@media (max-width: 768px) {
+
+  .report-issue-page {
+    padding: 25px 15px;
+  }
+
 }

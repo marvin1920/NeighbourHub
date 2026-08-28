@@ -24,11 +24,26 @@
   border: 1px solid #e0e7ff;
   box-shadow: 0 8px 25px rgba(79, 70, 229, 0.08);
   box-sizing: border-box;
+  text-align: center;
 }
 
 .user-profile h2 {
   color: #4f46e5;
   margin-bottom: 25px;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #4a90d9;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
 }
 
 /* User Information */
@@ -47,20 +62,11 @@
 .profile-info strong {
   color: #3730a3;
 }
-.profile-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-color: #4a90d9;
-  color: white;
-  font-size: 32px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px auto;
-}
 
-.user-profile {
-  text-align: center;
+@media (max-width: 768px) {
+
+  .profile-page {
+    padding: 25px 15px;
+  }
+
 }

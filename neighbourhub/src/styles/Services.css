@@ -43,6 +43,7 @@
 
 .service-card {
   width: 280px;
+  max-width: 100%;
   background: white;
   padding: 25px;
   border-radius: 12px;
@@ -94,4 +95,12 @@
 
 .service-card .delete-button:hover {
   background: #dc2626;
+}
+
+@media (max-width: 768px) {
+
+  .services-page {
+    padding: 25px 15px;
+  }
+
 }

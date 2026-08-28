@@ -43,6 +43,7 @@
 
 .event-card {
   width: 300px;
+  max-width: 100%;
   background: white;
   padding: 25px;
   border-radius: 12px;
@@ -78,6 +79,7 @@
 .event-card .delete-button:hover {
   background: #dc2626;
 }
+
 .event-card .edit-button {
   border: none;
   padding: 9px 16px;
@@ -92,4 +94,12 @@
 
 .event-card .edit-button:hover {
   background: #4f46e5;
+}
+
+@media (max-width: 768px) {
+
+  .events-page {
+    padding: 25px 15px;
+  }
+
 }
