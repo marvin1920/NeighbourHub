@@ -4,23 +4,19 @@ function AddProductForm({ onAddProduct }) {
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-  const [seller, setSeller] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
 
     const newProduct = {
-      id: Date.now(),
       name: name,
-      price: Number(price),
-      seller: seller
+      price: Number(price)
     };
 
     onAddProduct(newProduct);
 
     setName("");
     setPrice("");
-    setSeller("");
   }
 
   return (
@@ -40,13 +36,6 @@ function AddProductForm({ onAddProduct }) {
         placeholder="Price"
         value={price}
         onChange={(e) => setPrice(e.target.value)}
-      />
-
-      <input
-        type="text"
-        placeholder="Seller Name"
-        value={seller}
-        onChange={(e) => setSeller(e.target.value)}
       />
 
       <button type="submit">
