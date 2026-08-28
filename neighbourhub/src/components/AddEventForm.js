@@ -6,23 +6,20 @@ function AddEventForm({ onAddEvent }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [location, setLocation] = useState("");
-  const [organizer, setOrganizer] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!name || !date || !time || !location || !organizer) {
+    if (!name || !date || !time || !location) {
       alert("Please fill all fields");
       return;
     }
 
     const newEvent = {
-      id: Date.now(),
       name: name,
       date: date,
       time: time,
-      location: location,
-      organizer: organizer
+      location: location
     };
 
     onAddEvent(newEvent);
@@ -31,7 +28,6 @@ function AddEventForm({ onAddEvent }) {
     setDate("");
     setTime("");
     setLocation("");
-    setOrganizer("");
   }
 
   return (
@@ -65,13 +61,6 @@ function AddEventForm({ onAddEvent }) {
           placeholder="Location"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-        />
-
-        <input
-          type="text"
-          placeholder="Organizer Name"
-          value={organizer}
-          onChange={(e) => setOrganizer(e.target.value)}
         />
 
         <button type="submit">

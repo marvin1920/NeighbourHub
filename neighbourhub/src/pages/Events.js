@@ -1,4 +1,5 @@
-import { useState } from "react";
+import API from "../api/api";
+import { useState, useEffect } from "react";
 import EventCard from "../components/EventCard";
 import AddEventForm from "../components/AddEventForm";
 import "../styles/Events.css";
@@ -6,113 +7,95 @@ import "../styles/AddEventForm.css";
 
 function Events() {
 
-  const [events, setEvents] = useState([
-    {
-      id: 1,
-      name: "Community Clean-up",
-      date: "2026-08-20",
-      time: "10:00",
-      location: "Community Hall",
-      organizer: "Martin"
-    },
-    {
-      id: 2,
-      name: "Independence Day Celebration",
-      date: "2026-08-15",
-      time: "18:00",
-      location: "Society Garden",
-      organizer: "Rahul"
-    },
-    {
-      id: 3,
-      name: "Sports Day",
-      date: "2026-08-25",
-      time: "09:00",
-      location: "Community Ground",
-      organizer: "Priya"
-    }
-  ]);
+  const storedUser = localStorage.getItem("user");
+  const currentUser = storedUser ? JSON.parse(storedUser) : null;
 
+  const [events, setEvents] = useState([]);
   const [search, setSearch] = useState("");
 
-  // Add Event
-  function addEvent(newEvent) {
-    setEvents([...events, newEvent]);
-  }
+  useEffect(() => {
+    fetchEvents();
+  }, []);
 
-  // Delete Event
-  function deleteEvent(id) {
-    setEvents(
-      events.filter((event) => event.id !== id)
-    );
-  }
-
-  // Edit Event
-  function editEvent(event) {
-
-    const newName = prompt(
-      "Enter event name:",
-      event.name
-    );
-
-    const newDate = prompt(
-      "Enter date:",
-      event.date
-    );
-
-    const newTime = prompt(
-      "Enter time:",
-      event.time
-    );
-
-    const newLocation = prompt(
-      "Enter location:",
-      event.location
-    );
-
-    const newOrganizer = prompt(
-      "Enter organizer:",
-      event.organizer
-    );
-
-    if (
-      newName &&
-      newDate &&
-      newTime &&
-      newLocation &&
-      newOrganizer
-    ) {
-
-      setEvents(
-        events.map((item) =>
-          item.id === event.id
-            ? {
-                ...item,
-                name: newName,
-                date: newDate,
-                time: newTime,
-                location: newLocation,
-                organizer: newOrganizer
-              }
-            : item
-        )
-      );
+  async function fetchEvents() {
+    try {
+      const response = await API.get("/events");
+      setEvents(response.data);
+    } catch (error) {
+      console.error("Failed to fetch events:", error);
     }
   }
 
-  // Search Events
+  async function addEvent(newEvent) {
+    try {
+      const eventWithOrganizer = {
+        name: newEvent.name,
+        date: newEvent.date,
+        time: newEvent.time,
+        location: newEvent.location,
+        organizer: currentUser ? currentUser.name : "Unknown"
+      };
+
+      const response = await API.post("/events", eventWithOrganizer);
+      setEvents([...events, response.data]);
+
+    } catch (error) {
+      console.error("Failed to add event:", error);
+      alert("Failed to add event.");
+    }
+  }
+
+  async function deleteEvent(id) {
+    try {
+      await API.delete(`/events/${id}`);
+      setEvents(events.filter((event) => event.id !== id));
+    } catch (error) {
+      console.error("Failed to delete event:", error);
+      alert("Failed to delete event.");
+    }
+  }
+
+  async function editEvent(event) {
+
+    const newName = prompt("Enter event name:", event.name);
+    const newDate = prompt("Enter date:", event.date);
+    const newTime = prompt("Enter time:", event.time);
+    const newLocation = prompt("Enter location:", event.location);
+
+    if (newName && newDate && newTime && newLocation) {
+
+      try {
+        const updatedData = {
+          name: newName,
+          date: newDate,
+          time: newTime,
+          location: newLocation,
+          organizer: event.organizer
+        };
+
+        const response = await API.put(`/events/${event.id}`, updatedData);
+
+        setEvents(
+          events.map((item) =>
+            item.id === event.id ? response.data : item
+          )
+        );
+
+      } catch (error) {
+        console.error("Failed to update event:", error);
+        alert("Failed to update event.");
+      }
+    }
+  }
+
   const filteredEvents = events.filter((event) =>
-    event.name
-      .toLowerCase()
-      .includes(search.toLowerCase())
+    event.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div className="events-page">
 
       <h1>Community Events</h1>
-
-      {/* Search */}
 
       <input
         type="text"
@@ -122,11 +105,7 @@ function Events() {
         className="search-input"
       />
 
-      {/* Add Event */}
-
       <AddEventForm onAddEvent={addEvent} />
-
-      {/* Event Cards */}
 
       <div className="events-container">
 

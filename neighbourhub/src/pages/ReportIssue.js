@@ -1,4 +1,5 @@
-import { useState } from "react";
+import API from "../api/api";
+import { useState, useEffect } from "react";
 import IssueCard from "../components/IssueCard";
 import ReportIssueForm from "../components/ReportIssueForm";
 import "../styles/ReportIssue.css";
@@ -6,45 +7,54 @@ import "../styles/ReportIssueForm.css";
 
 function ReportIssue() {
 
-  const [issues, setIssues] = useState([
-    {
-      id: 1,
-      title: "Street Light Not Working",
-      category: "Electricity",
-      location: "Building B",
-      description: "The street light near the parking area is not working."
-    },
-    {
-      id: 2,
-      title: "Water Leakage",
-      category: "Water",
-      location: "Building A",
-      description: "There is water leakage near the entrance."
-    },
-    {
-      id: 3,
-      title: "Garbage Not Collected",
-      category: "Cleanliness",
-      location: "Block C",
-      description: "Garbage has not been collected for the last two days."
-    }
-  ]);
+  const storedUser = localStorage.getItem("user");
+  const currentUser = storedUser ? JSON.parse(storedUser) : null;
 
+  const [issues, setIssues] = useState([]);
   const [search, setSearch] = useState("");
 
-  // Add Issue
-  function addIssue(newIssue) {
-    setIssues([...issues, newIssue]);
+  useEffect(() => {
+    fetchIssues();
+  }, []);
+
+  async function fetchIssues() {
+    try {
+      const response = await API.get("/issues");
+      setIssues(response.data);
+    } catch (error) {
+      console.error("Failed to fetch issues:", error);
+    }
   }
 
-  // Delete Issue
-  function deleteIssue(id) {
-    setIssues(
-      issues.filter((issue) => issue.id !== id)
-    );
+  async function addIssue(newIssue) {
+    try {
+      const issueWithReporter = {
+        title: newIssue.title,
+        category: newIssue.category,
+        location: newIssue.location,
+        description: newIssue.description,
+        reportedBy: currentUser ? currentUser.name : "Unknown"
+      };
+
+      const response = await API.post("/issues", issueWithReporter);
+      setIssues([...issues, response.data]);
+
+    } catch (error) {
+      console.error("Failed to report issue:", error);
+      alert("Failed to report issue.");
+    }
   }
 
-  // Search Issues
+  async function deleteIssue(id) {
+    try {
+      await API.delete(`/issues/${id}`);
+      setIssues(issues.filter((issue) => issue.id !== id));
+    } catch (error) {
+      console.error("Failed to delete issue:", error);
+      alert("Failed to delete issue.");
+    }
+  }
+
   const filteredIssues = issues.filter((issue) =>
     issue.title.toLowerCase().includes(search.toLowerCase())
   );

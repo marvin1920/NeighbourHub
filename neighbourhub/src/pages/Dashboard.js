@@ -1,9 +1,36 @@
+import { useState, useEffect } from "react";
+import API from "../api/api";
 import "../styles/Dashboard.css";
 
 function Dashboard() {
 
   const storedUser = localStorage.getItem("user");
   const user = storedUser ? JSON.parse(storedUser) : null;
+
+  const [listingCount, setListingCount] = useState(0);
+  const [eventCount, setEventCount] = useState(0);
+  const [issueCount, setIssueCount] = useState(0);
+
+  useEffect(() => {
+    async function fetchCounts() {
+      try {
+        const [listingsRes, eventsRes, issuesRes] = await Promise.all([
+          API.get("/listings"),
+          API.get("/events"),
+          API.get("/issues")
+        ]);
+
+        setListingCount(listingsRes.data.length);
+        setEventCount(eventsRes.data.length);
+        setIssueCount(issuesRes.data.length);
+
+      } catch (error) {
+        console.error("Failed to fetch dashboard counts:", error);
+      }
+    }
+
+    fetchCounts();
+  }, []);
 
   return (
     <div className="dashboard">
@@ -17,19 +44,19 @@ function Dashboard() {
 
         <div className="stat-card">
           <h3>Marketplace</h3>
-          <h2>12</h2>
+          <h2>{listingCount}</h2>
           <p>Active Listings</p>
         </div>
 
         <div className="stat-card">
           <h3>Events</h3>
-          <h2>5</h2>
+          <h2>{eventCount}</h2>
           <p>Upcoming Events</p>
         </div>
 
         <div className="stat-card">
           <h3>Issues</h3>
-          <h2>2</h2>
+          <h2>{issueCount}</h2>
           <p>Reported Issues</p>
         </div>
 
