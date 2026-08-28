@@ -5,3 +5,20 @@
   box-sizing: border-box;
   background: linear-gradient(135deg, #f5f7ff, #f8f4ff);
 }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    padding: 20px 15px;
+    min-height: 100vh;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .main-content {
+    padding: 15px 10px;
+  }
+}

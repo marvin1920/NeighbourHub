@@ -12,6 +12,7 @@
   left: 0;
   top: 0;
   border-right: 1px solid #ddd6fe;
+  z-index: 1000;
 }
 
 /* Logo */
@@ -65,36 +66,97 @@
   color: #b91c1c;
 }
 
+
+/* =========================
+   Mobile Responsive
+========================= */
+
 @media (max-width: 768px) {
 
   .sidebar {
     width: 100%;
     min-height: auto;
-    position: static;
+    height: auto;
+
+    position: relative;
+    left: auto;
+    top: auto;
+
     display: flex;
     flex-direction: row;
     align-items: center;
+
     overflow-x: auto;
+    overflow-y: hidden;
+
     padding: 10px;
+
     border-right: none;
     border-bottom: 1px solid #ddd6fe;
+
+    box-sizing: border-box;
+
+    z-index: 1000;
   }
+
+  /* Logo */
 
   .sidebar h2 {
     margin: 0 15px 0 5px;
-    white-space: nowrap;
     font-size: 18px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
+  /* Navigation links */
+
   .sidebar a {
+    display: block;
+
     white-space: nowrap;
+
     margin: 0 4px;
+
     padding: 10px 12px;
+
     font-size: 13px;
+
+    flex-shrink: 0;
   }
+
+  /* Remove desktop hover movement on mobile */
+
+  .sidebar a:hover {
+    transform: none;
+  }
+
+  /* Logout */
 
   .sidebar .logout {
     margin-top: 0;
+    flex-shrink: 0;
+  }
+}
+
+
+/* =========================
+   Small Mobile
+========================= */
+
+@media (max-width: 480px) {
+
+  .sidebar {
+    padding: 8px;
   }
 
+  .sidebar h2 {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+
+  .sidebar a {
+    padding: 9px 10px;
+    font-size: 12px;
+    margin: 0 3px;
+  }
 }
