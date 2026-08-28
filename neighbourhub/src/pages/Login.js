@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import API from "../api/api";
+import loginImg from "../assets/images/login.png";
 import "../styles/Login.css";
 
 function Login() {
@@ -20,16 +21,11 @@ function Login() {
     }
 
     try {
-      const response = await API.post("/login", {
-        email,
-        password
-      });
+      const response = await API.post("/login", { email, password });
 
-      // Save logged-in user's details
       localStorage.setItem("user", JSON.stringify(response.data));
 
       console.log("Login response:", response.data);
-
       navigate("/dashboard");
 
     } catch (error) {
@@ -45,42 +41,48 @@ function Login() {
 
       <div className="login-container">
 
-        <h1>Welcome Back</h1>
+        <img src={loginImg} alt="Login illustration" className="login-image" />
 
-        <p>Login to your NeighbourHub account</p>
+        <div className="login-form-section">
 
-        <form onSubmit={handleLogin}>
+          <h1>Welcome Back</h1>
 
-          <label>Email</label>
+          <p>Login to your NeighbourHub account</p>
 
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <form onSubmit={handleLogin}>
 
-          <label>Password</label>
+            <label>Email</label>
 
-          <input
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-          <button type="submit">
-            Login
-          </button>
+            <label>Password</label>
 
-        </form>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-        <p className="register-link">
-          Don't have an account?{" "}
-          <Link to="/register">
-            Register
-          </Link>
-        </p>
+            <button type="submit">
+              Login
+            </button>
+
+          </form>
+
+          <p className="register-link">
+            Don't have an account?{" "}
+            <Link to="/register">
+              Register
+            </Link>
+          </p>
+
+        </div>
 
       </div>
 

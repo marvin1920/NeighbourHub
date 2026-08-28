@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import API from "../api/api";
+import registerImg from "../assets/images/register.png";
 import "../styles/Register.css";
 
 function Register() {
@@ -45,60 +46,66 @@ function Register() {
 
       <div className="register-container">
 
-        <h1>Create Account</h1>
+        <img src={registerImg} alt="Register illustration" className="register-image" />
 
-        <p>Join your NeighbourHub community</p>
+        <div className="register-form-section">
 
-        <form onSubmit={handleRegister}>
+          <h1>Create Account</h1>
 
-          <label>Name</label>
+          <p>Join your NeighbourHub community</p>
 
-          <input
-            type="text"
-            placeholder="Enter your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+          <form onSubmit={handleRegister}>
 
-          <label>Email</label>
+            <label>Name</label>
 
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <input
+              type="text"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
 
-          <label>Password</label>
+            <label>Email</label>
 
-          <input
-            type="password"
-            placeholder="Create a password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-          <label>Confirm Password</label>
+            <label>Password</label>
 
-          <input
-            type="password"
-            placeholder="Confirm your password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
+            <input
+              type="password"
+              placeholder="Create a password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-          <button type="submit">
-            Create Account
-          </button>
+            <label>Confirm Password</label>
 
-        </form>
+            <input
+              type="password"
+              placeholder="Confirm your password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
 
-        <p className="login-link">
-          Already have an account?{" "}
-          <Link to="/login">
-            Login
-          </Link>
-        </p>
+            <button type="submit">
+              Create Account
+            </button>
+
+          </form>
+
+          <p className="login-link">
+            Already have an account?{" "}
+            <Link to="/login">
+              Login
+            </Link>
+          </p>
+
+        </div>
 
       </div>
 

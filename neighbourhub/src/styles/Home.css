@@ -139,3 +139,24 @@
   }
 
 }
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-image {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+}
+
+.feature-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}

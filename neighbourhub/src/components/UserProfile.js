@@ -1,6 +1,15 @@
 function UserProfile({ user }) {
+
+  const initials = user.name
+    ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2)
+    : "?";
+
   return (
     <div className="user-profile">
+
+      <div className="profile-avatar">
+        {initials}
+      </div>
 
       <h2>User Profile</h2>
 

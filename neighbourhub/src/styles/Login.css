@@ -105,3 +105,21 @@
 .register-link a:hover {
   text-decoration: underline;
 }
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.login-image {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+}
+
+.login-form-section {
+  max-width: 400px;
+  width: 100%;
+}
