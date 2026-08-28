@@ -3,11 +3,11 @@ import "../styles/Profile.css";
 
 function Profile() {
 
-  const user = {
-    name: "Martin",
-    email: "martin@example.com",
-    role: "Resident"
-  };
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (!user) {
+    return <h2>Please login first.</h2>;
+  }
 
   return (
     <div className="profile-page">
