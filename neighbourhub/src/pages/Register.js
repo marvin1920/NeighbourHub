@@ -13,11 +13,12 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [society, setSociety] = useState("");
 
   async function handleRegister(e) {
     e.preventDefault();
 
-    if (!name || !email || !password || !confirmPassword) {
+    if (!name || !email || !password || !confirmPassword || !society) {
       alert("Please fill all fields.");
       return;
     }
@@ -28,7 +29,7 @@ function Register() {
     }
 
     try {
-      await API.post("/register", { name, email, password });
+      await API.post("/register", { name, email, password, society });
 
       alert("Registration successful!");
       navigate("/login");
@@ -72,6 +73,15 @@ function Register() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <label>Society Name</label>
+
+            <input
+              type="text"
+              placeholder="e.g. Green Valley Society"
+              value={society}
+              onChange={(e) => setSociety(e.target.value)}
             />
 
             <label>Password</label>

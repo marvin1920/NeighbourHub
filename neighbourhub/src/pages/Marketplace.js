@@ -22,8 +22,14 @@ function Marketplace() {
   }, []);
 
   async function fetchListings() {
+
+    if (!currentUser || !currentUser.society) {
+      console.error("No logged-in user or society found.");
+      return;
+    }
+
     try {
-      const response = await API.get("/listings");
+      const response = await API.get(`/listings?society=${encodeURIComponent(currentUser.society)}`);
       setProducts(response.data);
     } catch (error) {
       console.error("Failed to fetch listings:", error);
@@ -35,7 +41,8 @@ function Marketplace() {
       const productWithSeller = {
         name: newProduct.name,
         price: newProduct.price,
-        seller: currentUser ? currentUser.name : "Unknown"
+        seller: currentUser ? currentUser.name : "Unknown",
+        society: currentUser ? currentUser.society : ""
       };
 
       const response = await API.post("/listings", productWithSeller);
@@ -70,7 +77,8 @@ function Marketplace() {
       const updatedData = {
         name: editName,
         price: Number(editPrice),
-        seller: editingProduct.seller
+        seller: editingProduct.seller,
+        society: editingProduct.society
       };
 
       const response = await API.put(`/listings/${editingProduct.id}`, updatedData);

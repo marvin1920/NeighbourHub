@@ -19,7 +19,7 @@ function Events() {
 
   async function fetchEvents() {
     try {
-      const response = await API.get("/events");
+      const response = await API.get(`/events?society=${encodeURIComponent(currentUser.society)}`);
       setEvents(response.data);
     } catch (error) {
       console.error("Failed to fetch events:", error);
@@ -33,7 +33,8 @@ function Events() {
         date: newEvent.date,
         time: newEvent.time,
         location: newEvent.location,
-        organizer: currentUser ? currentUser.name : "Unknown"
+        organizer: currentUser ? currentUser.name : "Unknown",
+        society: currentUser ? currentUser.society : ""
       };
 
       const response = await API.post("/events", eventWithOrganizer);
@@ -70,7 +71,8 @@ function Events() {
           date: newDate,
           time: newTime,
           location: newLocation,
-          organizer: event.organizer
+          organizer: event.organizer,
+          society: event.society
         };
 
         const response = await API.put(`/events/${event.id}`, updatedData);

@@ -19,7 +19,7 @@ function ReportIssue() {
 
   async function fetchIssues() {
     try {
-      const response = await API.get("/issues");
+      const response = await API.get(`/issues?society=${encodeURIComponent(currentUser.society)}`);
       setIssues(response.data);
     } catch (error) {
       console.error("Failed to fetch issues:", error);
@@ -33,7 +33,8 @@ function ReportIssue() {
         category: newIssue.category,
         location: newIssue.location,
         description: newIssue.description,
-        reportedBy: currentUser ? currentUser.name : "Unknown"
+        reportedBy: currentUser ? currentUser.name : "Unknown",
+        society: currentUser ? currentUser.society : ""
       };
 
       const response = await API.post("/issues", issueWithReporter);

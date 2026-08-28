@@ -14,10 +14,12 @@ function Dashboard() {
   useEffect(() => {
     async function fetchCounts() {
       try {
+        const societyParam = encodeURIComponent(user.society);
+
         const [listingsRes, eventsRes, issuesRes] = await Promise.all([
-          API.get("/listings"),
-          API.get("/events"),
-          API.get("/issues")
+          API.get(`/listings?society=${societyParam}`),
+          API.get(`/events?society=${societyParam}`),
+          API.get(`/issues?society=${societyParam}`)
         ]);
 
         setListingCount(listingsRes.data.length);
@@ -29,8 +31,10 @@ function Dashboard() {
       }
     }
 
-    fetchCounts();
-  }, []);
+    if (user) {
+      fetchCounts();
+    }
+  }, [user]);
 
   return (
     <div className="dashboard">
