@@ -4,22 +4,19 @@ function AddServiceForm({ onAddService }) {
 
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-  const [provider, setProvider] = useState("");
   const [contact, setContact] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!name || !category || !provider || !contact) {
+    if (!name || !category || !contact) {
       alert("Please fill all fields");
       return;
     }
 
     const newService = {
-      id: Date.now(),
       name: name,
       category: category,
-      provider: provider,
       contact: contact
     };
 
@@ -27,7 +24,6 @@ function AddServiceForm({ onAddService }) {
 
     setName("");
     setCategory("");
-    setProvider("");
     setContact("");
   }
 
@@ -50,13 +46,6 @@ function AddServiceForm({ onAddService }) {
           placeholder="Category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-        />
-
-        <input
-          type="text"
-          placeholder="Provider Name"
-          value={provider}
-          onChange={(e) => setProvider(e.target.value)}
         />
 
         <input

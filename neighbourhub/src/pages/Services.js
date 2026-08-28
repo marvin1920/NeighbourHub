@@ -1,4 +1,5 @@
-import { useState } from "react";
+import API from "../api/api";
+import { useState, useEffect } from "react";
 import ServiceCard from "../components/ServiceCard";
 import AddServiceForm from "../components/AddServiceForm";
 import "../styles/Services.css";
@@ -6,69 +7,92 @@ import "../styles/AddServiceForm.css";
 
 function Services() {
 
-  const [services, setServices] = useState([
-    {
-      id: 1,
-      name: "Electrician",
-      category: "Home Repair",
-      provider: "Rahul",
-      contact: "9876543210"
-    },
-    {
-      id: 2,
-      name: "Plumber",
-      category: "Home Repair",
-      provider: "Amit",
-      contact: "9876543211"
-    },
-    {
-      id: 3,
-      name: "Home Tutor",
-      category: "Education",
-      provider: "Priya",
-      contact: "9876543212"
-    }
-  ]);
+  const storedUser = localStorage.getItem("user");
+  const currentUser = storedUser ? JSON.parse(storedUser) : null;
 
+  const [services, setServices] = useState([]);
   const [search, setSearch] = useState("");
 
-  // Add Service
-  function addService(newService) {
-    setServices([...services, newService]);
-  }
+  useEffect(() => {
+    fetchServices();
+  }, []);
 
-  // Delete Service
-  function deleteService(id) {
-    setServices(
-      services.filter((service) => service.id !== id)
-    );
-  }
+  async function fetchServices() {
 
-  // Edit Service
-  function editService(service) {
-    const newName = prompt("Enter service name:", service.name);
-    const newCategory = prompt("Enter category:", service.category);
-    const newProvider = prompt("Enter provider name:", service.provider);
-    const newContact = prompt("Enter contact number:", service.contact);
+    if (!currentUser || !currentUser.society) {
+      console.error("No logged-in user or society found.");
+      return;
+    }
 
-    if (newName && newCategory && newProvider && newContact) {
-      setServices(
-        services.map((item) =>
-          item.id === service.id
-            ? {
-                ...item,
-                name: newName,
-                category: newCategory,
-                provider: newProvider,
-                contact: newContact
-              }
-            : item
-        )
-      );
+    try {
+      const response = await API.get(`/services?society=${encodeURIComponent(currentUser.society)}`);
+      setServices(response.data);
+    } catch (error) {
+      console.error("Failed to fetch services:", error);
     }
   }
 
-  // Search Services
+  async function addService(newService) {
+    try {
+      const serviceWithProvider = {
+        name: newService.name,
+        category: newService.category,
+        provider: currentUser ? currentUser.name : "Unknown",
+        contact: newService.contact,
+        society: currentUser ? currentUser.society : ""
+      };
+
+      const response = await API.post("/services", serviceWithProvider);
+      setServices([...services, response.data]);
+
+    } catch (error) {
+      console.error("Failed to add service:", error);
+      alert("Failed to add service.");
+    }
+  }
+
+  async function deleteService(id) {
+    try {
+      await API.delete(`/services/${id}`);
+      setServices(services.filter((service) => service.id !== id));
+    } catch (error) {
+      console.error("Failed to delete service:", error);
+      alert("Failed to delete service.");
+    }
+  }
+
+  async function editService(service) {
+
+    const newName = prompt("Enter service name:", service.name);
+    const newCategory = prompt("Enter category:", service.category);
+    const newContact = prompt("Enter contact number:", service.contact);
+
+    if (newName && newCategory && newContact) {
+
+      try {
+        const updatedData = {
+          name: newName,
+          category: newCategory,
+          provider: service.provider,
+          contact: newContact,
+          society: service.society
+        };
+
+        const response = await API.put(`/services/${service.id}`, updatedData);
+
+        setServices(
+          services.map((item) =>
+            item.id === service.id ? response.data : item
+          )
+        );
+
+      } catch (error) {
+        console.error("Failed to update service:", error);
+        alert("Failed to update service.");
+      }
+    }
+  }
+
   const filteredServices = services.filter((service) =>
     service.name.toLowerCase().includes(search.toLowerCase())
   );
