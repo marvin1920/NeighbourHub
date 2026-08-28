@@ -1,10 +1,15 @@
 import "../styles/Dashboard.css";
+
 function Dashboard() {
+
+  const storedUser = localStorage.getItem("user");
+  const user = storedUser ? JSON.parse(storedUser) : null;
+
   return (
     <div className="dashboard">
 
       <div className="dashboard-header">
-        <h1>Welcome back! 👋</h1>
+        <h1>Welcome back, {user ? user.name : "Guest"}! 👋</h1>
         <p>Here's what's happening in your community.</p>
       </div>
 
