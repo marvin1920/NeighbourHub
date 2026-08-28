@@ -64,3 +64,37 @@
   background: #fee2e2;
   color: #b91c1c;
 }
+
+@media (max-width: 768px) {
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    padding: 10px;
+    border-right: none;
+    border-bottom: 1px solid #ddd6fe;
+  }
+
+  .sidebar h2 {
+    margin: 0 15px 0 5px;
+    white-space: nowrap;
+    font-size: 18px;
+  }
+
+  .sidebar a {
+    white-space: nowrap;
+    margin: 0 4px;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .sidebar .logout {
+    margin-top: 0;
+  }
+
+}

@@ -8,11 +8,10 @@
   box-sizing: border-box;
 }
 
-/* Login Card */
+/* Login Card (image + form side by side) */
 
 .login-container {
-  width: 420px;
-  max-width: 90%;
+  max-width: 800px;
   margin: 80px auto;
   padding: 35px;
   background: white;
@@ -20,17 +19,34 @@
   border: 1px solid #e0e7ff;
   box-shadow: 0 10px 30px rgba(79, 70, 229, 0.12);
   box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.login-image {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+}
+
+.login-form-section {
+  max-width: 380px;
+  width: 100%;
 }
 
 /* Heading */
 
-.login-container h1 {
+.login-form-section h1 {
   text-align: center;
   color: #3730a3;
   margin-bottom: 10px;
 }
 
-.login-container > p {
+.login-form-section > p {
   text-align: center;
   color: #6b7280;
   margin-bottom: 30px;
@@ -38,14 +54,14 @@
 
 /* Form */
 
-.login-container form {
+.login-form-section form {
   display: flex;
   flex-direction: column;
 }
 
 /* Labels */
 
-.login-container label {
+.login-form-section label {
   color: #3730a3;
   font-weight: 600;
   margin-bottom: 7px;
@@ -53,16 +69,17 @@
 
 /* Inputs */
 
-.login-container input {
+.login-form-section input {
   padding: 12px 14px;
   margin-bottom: 18px;
   border: 1px solid #c7d2fe;
   border-radius: 8px;
   font-size: 15px;
   box-sizing: border-box;
+  width: 100%;
 }
 
-.login-container input:focus {
+.login-form-section input:focus {
   outline: none;
   border-color: #6366f1;
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
@@ -70,7 +87,7 @@
 
 /* Login Button */
 
-.login-container button {
+.login-form-section button {
   padding: 12px;
   margin-top: 5px;
   border: none;
@@ -83,7 +100,7 @@
   transition: 0.2s ease;
 }
 
-.login-container button:hover {
+.login-form-section button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(79, 70, 229, 0.25);
 }
@@ -105,21 +122,20 @@
 .register-link a:hover {
   text-decoration: underline;
 }
-.login-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 60px;
-  flex-wrap: wrap;
-}
 
-.login-image {
-  max-width: 350px;
-  width: 100%;
-  height: auto;
-}
+@media (max-width: 480px) {
 
-.login-form-section {
-  max-width: 400px;
-  width: 100%;
+  .login-container {
+    margin: 30px auto;
+    padding: 25px 20px;
+  }
+
+  .login-image {
+    max-width: 200px;
+  }
+
+  .login-form-section h1 {
+    font-size: 24px;
+  }
+
 }

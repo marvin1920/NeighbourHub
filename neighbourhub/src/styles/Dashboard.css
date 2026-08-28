@@ -52,3 +52,12 @@
 .stat-card p {
   color: #64748b;
 }
+
+@media (max-width: 768px) {
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px 15px;
+  }
+
+}

@@ -7,12 +7,18 @@
 .hero {
   min-height: 430px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
   padding: 60px 20px;
   box-sizing: border-box;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
 }
 
 .hero h1 {
@@ -27,7 +33,6 @@
   font-size: 18px;
   color: #64748b;
 }
-
 
 .hero-button {
   background: linear-gradient(135deg, #4f46e5, #7c3aed);
@@ -46,62 +51,66 @@
   box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
 }
 
+.hero-image {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  flex: 1;
+  min-width: 280px;
+}
 
 .features {
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px 30px 70px;
-
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
-
   box-sizing: border-box;
 }
+
 .feature-card {
   background: rgba(255, 255, 255, 0.9);
   padding: 35px 25px;
   border-radius: 14px;
-
   text-align: center;
-
   box-shadow: 0 8px 25px rgba(30, 41, 59, 0.08);
-
   border: 1px solid #e0e7ff;
-
   transition: 0.3s;
 }
 
 .feature-card:hover {
   transform: translateY(-6px);
-
   box-shadow: 0 12px 30px rgba(79, 70, 229, 0.15);
-
   border-color: #c7d2fe;
+}
+
+.feature-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 12px;
 }
 
 .feature-card h3 {
   margin-bottom: 12px;
-
   color: #3730a3;
-
   font-size: 20px;
 }
 
 .feature-card p {
   margin: 0;
-
   color: #64748b;
-
   line-height: 1.6;
-
   font-size: 15px;
 }
 
 @media (max-width: 768px) {
 
   .hero {
-    min-height: 400px;
+    min-height: auto;
+    flex-direction: column;
+    text-align: center;
   }
 
   .hero h1 {
@@ -119,7 +128,6 @@
 
 }
 
-
 @media (max-width: 480px) {
 
   .hero {
@@ -127,36 +135,24 @@
   }
 
   .hero h1 {
-    font-size: 30px;
+    font-size: 28px;
   }
 
   .hero p {
     font-size: 15px;
   }
 
+  .hero-button {
+    padding: 12px 24px;
+    font-size: 15px;
+  }
+
+  .hero-image {
+    max-width: 260px;
+  }
+
   .feature-card {
     padding: 28px 20px;
   }
 
-}
-
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-
-.hero-image {
-  max-width: 400px;
-  width: 100%;
-  height: auto;
-}
-
-.feature-image {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  margin-bottom: 12px;
 }
