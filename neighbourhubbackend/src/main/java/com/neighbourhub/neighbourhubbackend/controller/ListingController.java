@@ -20,31 +20,48 @@ public class ListingController {
     }
 
     @GetMapping
-    public List<Listing> getAllListings(@RequestParam(required = false) String society) {
+    public List<Listing> getAllListings(
+            @RequestParam(required = false) String society) {
+
         if (society != null) {
             return listingRepository.findBySociety(society);
         }
+
         return listingRepository.findAll();
     }
 
     @PostMapping
     public Listing addListing(@RequestBody Listing newListing) {
+
         return listingRepository.save(newListing);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateListing(@PathVariable Integer id, @RequestBody Listing updatedListing) {
+    public ResponseEntity<?> updateListing(
+            @PathVariable Integer id,
+            @RequestBody Listing updatedListing) {
 
-        Optional<Listing> existing = listingRepository.findById(id);
+        Optional<Listing> existing =
+                listingRepository.findById(id);
 
         if (existing.isEmpty()) {
-            return ResponseEntity.status(404).body("Listing not found");
+            return ResponseEntity
+                    .status(404)
+                    .body("Listing not found");
         }
 
         Listing listing = existing.get();
+
         listing.setName(updatedListing.getName());
+
         listing.setPrice(updatedListing.getPrice());
+
         listing.setSeller(updatedListing.getSeller());
+
+        listing.setSellerContact(
+                updatedListing.getSellerContact()
+        );
+
         listing.setSociety(updatedListing.getSociety());
 
         listingRepository.save(listing);
@@ -53,10 +70,13 @@ public class ListingController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteListing(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteListing(
+            @PathVariable Integer id) {
 
         if (!listingRepository.existsById(id)) {
-            return ResponseEntity.status(404).body("Listing not found");
+            return ResponseEntity
+                    .status(404)
+                    .body("Listing not found");
         }
 
         listingRepository.deleteById(id);
