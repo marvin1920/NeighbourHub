@@ -14,8 +14,9 @@ function NoticeBoard() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetchNotices();
-  }, []);
+  fetchNotices();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
   async function fetchNotices() {
 

@@ -14,8 +14,9 @@ function Events() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetchEvents();
-  }, []);
+  fetchEvents();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
   async function fetchEvents() {
     try {

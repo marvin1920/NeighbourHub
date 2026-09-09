@@ -1,4 +1,5 @@
 function ProductCard({ product, onDelete, onEdit }) {
+
   return (
     <div className="product-card">
 
@@ -12,7 +13,15 @@ function ProductCard({ product, onDelete, onEdit }) {
         Seller: {product.seller}
       </p>
 
-      <button onClick={() => onEdit(product)}>
+      {product.sellerContact && (
+        <p className="seller-contact">
+          📞 Contact: {product.sellerContact}
+        </p>
+      )}
+
+      <button
+        onClick={() => onEdit(product)}
+      >
         Edit
       </button>
 

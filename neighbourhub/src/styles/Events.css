@@ -4,102 +4,270 @@
 
 .events-page {
   min-height: 100vh;
-  padding: 45px 60px;
+  padding: 40px 45px;
   box-sizing: border-box;
+  background: linear-gradient(135deg, #f8f9ff, #f5f3ff);
+  font-family: Arial, sans-serif;
 }
 
+/* Header */
+
 .events-page h1 {
+  margin: 0 0 8px;
   color: #3730a3;
-  margin-bottom: 25px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.events-page h1::after {
+  content: " • Discover and join events in your community";
+  font-size: 14px;
+  font-weight: 400;
+  color: #7c83a3;
 }
 
 /* Search */
 
 .events-page .search-input {
-  width: 400px;
+  width: 420px;
   max-width: 100%;
-  padding: 12px 14px;
-  margin-bottom: 25px;
-  border: 1px solid #c7d2fe;
-  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 25px 0 10px;
+
+  border: 1px solid #d9d6fe;
+  border-radius: 12px;
+  background: white;
+
+  color: #374151;
+  font-size: 14px;
+
   box-sizing: border-box;
+
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.06);
+
+  transition: all 0.2s ease;
+}
+
+.events-page .search-input::placeholder {
+  color: #9ca3af;
 }
 
 .events-page .search-input:focus {
   outline: none;
   border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
 }
 
 /* Events Container */
 
 .events-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
+
+  margin-top: 25px;
 }
 
 /* Event Card */
 
 .event-card {
-  width: 300px;
-  max-width: 100%;
+  position: relative;
+
   background: white;
-  padding: 25px;
-  border-radius: 12px;
-  border: 1px solid #e0e7ff;
-  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.08);
+  padding: 24px;
+
+  border-radius: 16px;
+  border: 1px solid #e7e5ff;
+
+  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.08);
+
   box-sizing: border-box;
+
+  overflow: hidden;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+/* Purple top line */
+
+.event-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background: linear-gradient(90deg, #6366f1, #a78bfa);
+}
+
+/* Hover */
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.14);
+}
+
+/* Event Title */
 
 .event-card h2 {
   color: #3730a3;
-  margin-top: 0;
-  margin-bottom: 18px;
+  margin: 5px 0 18px;
+
+  font-size: 20px;
+  font-weight: 700;
 }
+
+/* Event Details */
 
 .event-card p {
   color: #6b7280;
-  margin: 10px 0;
+  margin: 11px 0;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Event detail labels if present */
+
+.event-card p strong {
+  color: #4f46e5;
+}
+
+/* Buttons Container */
+
+.event-card button {
+  font-family: inherit;
+}
+
+/* Edit Button */
+
+.event-card .edit-button {
+  border: none;
+
+  padding: 9px 16px;
+  border-radius: 9px;
+
+  background: #6366f1;
+  color: white;
+
+  font-weight: 600;
+  font-size: 13px;
+
+  cursor: pointer;
+
+  margin-top: 14px;
+  margin-right: 8px;
+
+  transition: all 0.2s ease;
+}
+
+.event-card .edit-button:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
 }
 
 /* Delete Button */
 
 .event-card .delete-button {
   border: none;
+
   padding: 9px 16px;
-  border-radius: 6px;
-  background: #ef4444;
-  color: white;
+  border-radius: 9px;
+
+  background: #fee2e2;
+  color: #dc2626;
+
   font-weight: 600;
+  font-size: 13px;
+
   cursor: pointer;
-  margin-top: 12px;
+
+  margin-top: 14px;
+
+  transition: all 0.2s ease;
 }
 
 .event-card .delete-button:hover {
-  background: #dc2626;
+  background: #fecaca;
+  color: #b91c1c;
 }
 
-.event-card .edit-button {
-  border: none;
-  padding: 9px 16px;
-  border-radius: 6px;
-  background: #6366f1;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 12px;
-  margin-right: 8px;
-}
-
-.event-card .edit-button:hover {
-  background: #4f46e5;
-}
+/* =========================
+   Tablet
+========================= */
 
 @media (max-width: 768px) {
 
   .events-page {
-    padding: 25px 15px;
+    padding: 25px 18px;
   }
 
+  .events-page h1 {
+    font-size: 27px;
+  }
+
+  .events-page h1::after {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+  }
+
+  .events-page .search-input {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .events-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .event-card {
+    padding: 20px;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 480px) {
+
+  .events-page {
+    padding: 20px 12px;
+  }
+
+  .events-page h1 {
+    font-size: 24px;
+  }
+
+  .events-page h1::after {
+    font-size: 12px;
+  }
+
+  .events-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .event-card {
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  .event-card h2 {
+    font-size: 18px;
+  }
+
+  .event-card p {
+    font-size: 13px;
+  }
+
+  .event-card .edit-button,
+  .event-card .delete-button {
+    padding: 9px 13px;
+    font-size: 12px;
+  }
 }

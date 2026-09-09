@@ -14,8 +14,9 @@ function ReportIssue() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetchIssues();
-  }, []);
+  fetchIssues();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
   async function fetchIssues() {
     try {

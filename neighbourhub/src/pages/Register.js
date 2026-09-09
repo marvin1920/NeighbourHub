@@ -14,11 +14,19 @@ function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [society, setSociety] = useState("");
+  const [contact, setContact] = useState("");
 
   async function handleRegister(e) {
     e.preventDefault();
 
-    if (!name || !email || !password || !confirmPassword || !society) {
+    if (
+      !name ||
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !society ||
+      !contact
+    ) {
       alert("Please fill all fields.");
       return;
     }
@@ -29,7 +37,13 @@ function Register() {
     }
 
     try {
-      await API.post("/register", { name, email, password, society });
+      await API.post("/register", {
+        name,
+        email,
+        password,
+        society,
+        contact
+      });
 
       alert("Registration successful!");
       navigate("/login");
@@ -47,7 +61,11 @@ function Register() {
 
       <div className="register-container">
 
-        <img src={registerImg} alt="Register illustration" className="register-image" />
+        <img
+          src={registerImg}
+          alt="Register illustration"
+          className="register-image"
+        />
 
         <div className="register-form-section">
 
@@ -82,6 +100,15 @@ function Register() {
               placeholder="e.g. Green Valley Society"
               value={society}
               onChange={(e) => setSociety(e.target.value)}
+            />
+
+            <label>Contact Number</label>
+
+            <input
+              type="tel"
+              placeholder="Enter your contact number"
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
             />
 
             <label>Password</label>

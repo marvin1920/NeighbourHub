@@ -19,6 +19,7 @@ function Marketplace() {
 
   useEffect(() => {
     fetchListings();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function fetchListings() {
@@ -29,75 +30,133 @@ function Marketplace() {
     }
 
     try {
-      const response = await API.get(`/listings?society=${encodeURIComponent(currentUser.society)}`);
+      const response = await API.get(
+        `/listings?society=${encodeURIComponent(currentUser.society)}`
+      );
+
       setProducts(response.data);
+
     } catch (error) {
       console.error("Failed to fetch listings:", error);
     }
   }
 
   async function addProduct(newProduct) {
+
     try {
+
       const productWithSeller = {
         name: newProduct.name,
         price: newProduct.price,
-        seller: currentUser ? currentUser.name : "Unknown",
-        society: currentUser ? currentUser.society : ""
+
+        seller: currentUser
+          ? currentUser.name
+          : "Unknown",
+
+        sellerContact: currentUser
+          ? currentUser.contact
+          : "",
+
+        society: currentUser
+          ? currentUser.society
+          : ""
       };
 
-      const response = await API.post("/listings", productWithSeller);
+      const response = await API.post(
+        "/listings",
+        productWithSeller
+      );
+
       setProducts([...products, response.data]);
 
     } catch (error) {
+
       console.error("Failed to add listing:", error);
+
       alert("Failed to add product.");
     }
   }
 
   async function deleteProduct(id) {
+
     try {
+
       await API.delete(`/listings/${id}`);
-      setProducts(products.filter((product) => product.id !== id));
+
+      setProducts(
+        products.filter(
+          (product) => product.id !== id
+        )
+      );
+
     } catch (error) {
+
       console.error("Failed to delete listing:", error);
+
       alert("Failed to delete product.");
     }
   }
 
   function startEdit(product) {
+
     setEditingProduct(product);
+
     setEditName(product.name);
+
     setEditPrice(product.price);
   }
 
   async function updateProduct(e) {
+
     e.preventDefault();
 
     try {
+
       const updatedData = {
+
         name: editName,
+
         price: Number(editPrice),
+
         seller: editingProduct.seller,
+
+        sellerContact: editingProduct.sellerContact,
+
         society: editingProduct.society
       };
 
-      const response = await API.put(`/listings/${editingProduct.id}`, updatedData);
+      const response = await API.put(
+        `/listings/${editingProduct.id}`,
+        updatedData
+      );
 
-      const updatedProducts = products.map((product) =>
-        product.id === editingProduct.id ? response.data : product
+      const updatedProducts = products.map(
+        (product) =>
+          product.id === editingProduct.id
+            ? response.data
+            : product
       );
 
       setProducts(updatedProducts);
+
       setEditingProduct(null);
 
     } catch (error) {
-      console.error("Failed to update listing:", error);
+
+      console.error(
+        "Failed to update listing:",
+        error
+      );
+
       alert("Failed to update product.");
     }
   }
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(search.toLowerCase())
+  const filteredProducts = products.filter(
+    (product) =>
+      product.name
+        .toLowerCase()
+        .includes(search.toLowerCase())
   );
 
   return (
@@ -113,24 +172,34 @@ function Marketplace() {
         className="search-input"
       />
 
-      <AddProductForm onAddProduct={addProduct} />
+      <AddProductForm
+        onAddProduct={addProduct}
+      />
 
       {editingProduct && (
-        <form className="edit-product-form" onSubmit={updateProduct}>
+
+        <form
+          className="edit-product-form"
+          onSubmit={updateProduct}
+        >
 
           <h2>Edit Product</h2>
 
           <input
             type="text"
             value={editName}
-            onChange={(e) => setEditName(e.target.value)}
+            onChange={(e) =>
+              setEditName(e.target.value)
+            }
             placeholder="Product Name"
           />
 
           <input
             type="number"
             value={editPrice}
-            onChange={(e) => setEditPrice(e.target.value)}
+            onChange={(e) =>
+              setEditPrice(e.target.value)
+            }
             placeholder="Price"
           />
 
@@ -138,7 +207,12 @@ function Marketplace() {
             Update Product
           </button>
 
-          <button type="button" onClick={() => setEditingProduct(null)}>
+          <button
+            type="button"
+            onClick={() =>
+              setEditingProduct(null)
+            }
+          >
             Cancel
           </button>
 
@@ -148,12 +222,14 @@ function Marketplace() {
       <div className="products-container">
 
         {filteredProducts.map((product) => (
+
           <ProductCard
             key={product.id}
             product={product}
             onDelete={deleteProduct}
             onEdit={startEdit}
           />
+
         ))}
 
       </div>
