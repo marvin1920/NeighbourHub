@@ -14,51 +14,107 @@ function ReportIssue() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-  fetchIssues();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+    fetchIssues();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function fetchIssues() {
+
+    if (!currentUser || !currentUser.society) {
+      console.error("No logged-in user or society found.");
+      return;
+    }
+
     try {
-      const response = await API.get(`/issues?society=${encodeURIComponent(currentUser.society)}`);
+
+      const response = await API.get(
+        `/issues?society=${encodeURIComponent(currentUser.society)}`
+      );
+
       setIssues(response.data);
+
     } catch (error) {
-      console.error("Failed to fetch issues:", error);
+
+      console.error(
+        "Failed to fetch issues:",
+        error
+      );
+
     }
   }
 
   async function addIssue(newIssue) {
+
     try {
+
       const issueWithReporter = {
+
         title: newIssue.title,
         category: newIssue.category,
         location: newIssue.location,
         description: newIssue.description,
-        reportedBy: currentUser ? currentUser.name : "Unknown",
-        society: currentUser ? currentUser.society : ""
+
+        reportedBy: currentUser
+          ? currentUser.name
+          : "Unknown",
+
+        society: currentUser
+          ? currentUser.society
+          : ""
+
       };
 
-      const response = await API.post("/issues", issueWithReporter);
-      setIssues([...issues, response.data]);
+      const response = await API.post(
+        "/issues",
+        issueWithReporter
+      );
+
+      setIssues([
+        ...issues,
+        response.data
+      ]);
 
     } catch (error) {
-      console.error("Failed to report issue:", error);
+
+      console.error(
+        "Failed to report issue:",
+        error
+      );
+
       alert("Failed to report issue.");
+
     }
   }
 
   async function deleteIssue(id) {
+
     try {
+
       await API.delete(`/issues/${id}`);
-      setIssues(issues.filter((issue) => issue.id !== id));
+
+      setIssues(
+        issues.filter(
+          (issue) => issue.id !== id
+        )
+      );
+
     } catch (error) {
-      console.error("Failed to delete issue:", error);
+
+      console.error(
+        "Failed to delete issue:",
+        error
+      );
+
       alert("Failed to delete issue.");
+
     }
   }
 
-  const filteredIssues = issues.filter((issue) =>
-    issue.title.toLowerCase().includes(search.toLowerCase())
+  const filteredIssues = issues.filter(
+    (issue) =>
+      issue.title
+        .toLowerCase()
+        .includes(search.toLowerCase())
   );
 
   return (
@@ -70,20 +126,27 @@ function ReportIssue() {
         type="text"
         placeholder="Search reported issues..."
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) =>
+          setSearch(e.target.value)
+        }
         className="search-input"
       />
 
-      <ReportIssueForm onAddIssue={addIssue} />
+      <ReportIssueForm
+        onAddIssue={addIssue}
+      />
 
       <div className="issues-container">
 
         {filteredIssues.map((issue) => (
+
           <IssueCard
             key={issue.id}
             issue={issue}
             onDelete={deleteIssue}
+            currentUser={currentUser}
           />
+
         ))}
 
       </div>

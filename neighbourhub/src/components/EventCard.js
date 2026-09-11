@@ -1,4 +1,14 @@
-function EventCard({ event, onDelete, onEdit }) {
+function EventCard({
+  event,
+  onDelete,
+  onEdit,
+  currentUser
+}) {
+
+  const isOwner =
+    currentUser &&
+    currentUser.name === event.organizer;
+
   return (
     <div className="event-card">
 
@@ -12,19 +22,23 @@ function EventCard({ event, onDelete, onEdit }) {
 
       <p>👤 Organizer: {event.organizer}</p>
 
-      <button
-        onClick={() => onEdit(event)}
-        className="edit-button"
-      >
-        Edit
-      </button>
+      {isOwner && (
+        <>
+          <button
+            onClick={() => onEdit(event)}
+            className="edit-button"
+          >
+            Edit
+          </button>
 
-      <button
-        onClick={() => onDelete(event.id)}
-        className="delete-button"
-      >
-        Delete
-      </button>
+          <button
+            onClick={() => onDelete(event.id)}
+            className="delete-button"
+          >
+            Delete
+          </button>
+        </>
+      )}
 
     </div>
   );

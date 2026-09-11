@@ -30,6 +30,7 @@ function Marketplace() {
     }
 
     try {
+
       const response = await API.get(
         `/listings?society=${encodeURIComponent(currentUser.society)}`
       );
@@ -37,7 +38,9 @@ function Marketplace() {
       setProducts(response.data);
 
     } catch (error) {
+
       console.error("Failed to fetch listings:", error);
+
     }
   }
 
@@ -46,7 +49,9 @@ function Marketplace() {
     try {
 
       const productWithSeller = {
+
         name: newProduct.name,
+
         price: newProduct.price,
 
         seller: currentUser
@@ -60,6 +65,7 @@ function Marketplace() {
         society: currentUser
           ? currentUser.society
           : ""
+
       };
 
       const response = await API.post(
@@ -67,13 +73,20 @@ function Marketplace() {
         productWithSeller
       );
 
-      setProducts([...products, response.data]);
+      setProducts([
+        ...products,
+        response.data
+      ]);
 
     } catch (error) {
 
-      console.error("Failed to add listing:", error);
+      console.error(
+        "Failed to add listing:",
+        error
+      );
 
       alert("Failed to add product.");
+
     }
   }
 
@@ -81,7 +94,9 @@ function Marketplace() {
 
     try {
 
-      await API.delete(`/listings/${id}`);
+      await API.delete(
+        `/listings/${id}`
+      );
 
       setProducts(
         products.filter(
@@ -91,9 +106,13 @@ function Marketplace() {
 
     } catch (error) {
 
-      console.error("Failed to delete listing:", error);
+      console.error(
+        "Failed to delete listing:",
+        error
+      );
 
       alert("Failed to delete product.");
+
     }
   }
 
@@ -104,6 +123,7 @@ function Marketplace() {
     setEditName(product.name);
 
     setEditPrice(product.price);
+
   }
 
   async function updateProduct(e) {
@@ -123,6 +143,7 @@ function Marketplace() {
         sellerContact: editingProduct.sellerContact,
 
         society: editingProduct.society
+
       };
 
       const response = await API.put(
@@ -149,6 +170,7 @@ function Marketplace() {
       );
 
       alert("Failed to update product.");
+
     }
   }
 
@@ -168,7 +190,9 @@ function Marketplace() {
         type="text"
         placeholder="Search products..."
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) =>
+          setSearch(e.target.value)
+        }
         className="search-input"
       />
 
@@ -221,16 +245,19 @@ function Marketplace() {
 
       <div className="products-container">
 
-        {filteredProducts.map((product) => (
+        {filteredProducts.map(
+          (product) => (
 
-          <ProductCard
-            key={product.id}
-            product={product}
-            onDelete={deleteProduct}
-            onEdit={startEdit}
-          />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onDelete={deleteProduct}
+              onEdit={startEdit}
+              currentUser={currentUser}
+            />
 
-        ))}
+          )
+        )}
 
       </div>
 

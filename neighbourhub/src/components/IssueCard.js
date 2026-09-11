@@ -1,4 +1,13 @@
-function IssueCard({ issue, onDelete }) {
+function IssueCard({
+  issue,
+  onDelete,
+  currentUser
+}) {
+
+  const isOwner =
+    currentUser &&
+    currentUser.name === issue.reportedBy;
+
   return (
     <div className="issue-card">
 
@@ -16,12 +25,18 @@ function IssueCard({ issue, onDelete }) {
         {issue.description}
       </p>
 
-      <button
-        onClick={() => onDelete(issue.id)}
-        className="delete-button"
-      >
-        Delete
-      </button>
+      <p>
+        👤 Reported By: {issue.reportedBy}
+      </p>
+
+      {isOwner && (
+        <button
+          onClick={() => onDelete(issue.id)}
+          className="delete-button"
+        >
+          Delete
+        </button>
+      )}
 
     </div>
   );

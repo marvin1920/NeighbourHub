@@ -1,4 +1,14 @@
-function ServiceCard({ service, onDelete, onEdit }) {
+function ServiceCard({
+  service,
+  onDelete,
+  onEdit,
+  currentUser
+}) {
+
+  const isOwner =
+    currentUser &&
+    currentUser.name === service.provider;
+
   return (
     <div className="service-card">
 
@@ -16,19 +26,23 @@ function ServiceCard({ service, onDelete, onEdit }) {
         Contact: {service.contact}
       </p>
 
-      <button
-        onClick={() => onEdit(service)}
-        className="edit-button"
-      >
-        Edit
-      </button>
+      {isOwner && (
+        <>
+          <button
+            onClick={() => onEdit(service)}
+            className="edit-button"
+          >
+            Edit
+          </button>
 
-      <button
-        onClick={() => onDelete(service.id)}
-        className="delete-button"
-      >
-        Delete
-      </button>
+          <button
+            onClick={() => onDelete(service.id)}
+            className="delete-button"
+          >
+            Delete
+          </button>
+        </>
+      )}
 
     </div>
   );

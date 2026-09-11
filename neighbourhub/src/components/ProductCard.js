@@ -1,4 +1,8 @@
-function ProductCard({ product, onDelete, onEdit }) {
+function ProductCard({ product, onDelete, onEdit, currentUser }) {
+
+  const isOwner =
+    currentUser &&
+    currentUser.name === product.seller;
 
   return (
     <div className="product-card">
@@ -19,18 +23,22 @@ function ProductCard({ product, onDelete, onEdit }) {
         </p>
       )}
 
-      <button
-        onClick={() => onEdit(product)}
-      >
-        Edit
-      </button>
+      {isOwner && (
+        <>
+          <button
+            onClick={() => onEdit(product)}
+          >
+            Edit
+          </button>
 
-      <button
-        onClick={() => onDelete(product.id)}
-        className="delete-button"
-      >
-        Delete
-      </button>
+          <button
+            onClick={() => onDelete(product.id)}
+            className="delete-button"
+          >
+            Delete
+          </button>
+        </>
+      )}
 
     </div>
   );
